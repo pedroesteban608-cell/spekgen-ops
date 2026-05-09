@@ -1,0 +1,12 @@
+.env
+*.env
+credentials*.json
+token*.json
+service_account*.json
+__pycache__/
+*.pyc
+*.pyo
+reports/
+/tmp/
+.DS_Store
+Thumbs.db
