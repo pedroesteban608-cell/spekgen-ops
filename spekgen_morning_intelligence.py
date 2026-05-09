@@ -172,7 +172,7 @@ CLIENTS = {
         "ad_log_drive_id": None,
         "ad_log_sheet":    None,
         "ad_prefix":       "F24",
-        "clickup_list_id": "PLACEHOLDER_F24_CLICKUP_LIST_ID",
+        "clickup_list_id": "901713618377",  # Fase 1 (actualizar a 901713618380 en Fase 2, 901713618382 en Fase 3)
         "cpa_thresholds":  {},
         "rotation_days":   7,
     },
