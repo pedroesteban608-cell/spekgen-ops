@@ -162,7 +162,7 @@ CLIENTS = {
         "ad_log_drive_id": AD_LOG_UNIFIED_DRIVE_ID,
         "ad_log_sheet":    "\U0001f4cb HC ADS",
         "ad_prefix":       "HC",
-        "clickup_list_id": "PLACEHOLDER_HC_CLICKUP_LIST_ID",
+        "clickup_list_id": "901713039974",
         "cpa_thresholds":  {"default": 150},
         "rotation_days":   7,
     },
