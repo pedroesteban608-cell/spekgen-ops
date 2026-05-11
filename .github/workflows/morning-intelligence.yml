@@ -21,11 +21,20 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Populate Google Sheets (Setup)
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          MASTER_REGISTRY_SHEET_ID: ${{ secrets.MASTER_REGISTRY_SHEET_ID }}
+          MORNING_INTELLIGENCE_LOG_SHEET_ID: ${{ secrets.MORNING_INTELLIGENCE_LOG_SHEET_ID }}
+        run: python setup_sheets.py
+
       - name: Run SpekGen Morning Intelligence
         env:
           CLICKUP_TOKEN: ${{ secrets.CLICKUP_TOKEN }}
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           MASTER_REGISTRY_SHEET_ID: ${{ secrets.MASTER_REGISTRY_SHEET_ID }}
+          MORNING_INTELLIGENCE_LOG_SHEET_ID: ${{ secrets.MORNING_INTELLIGENCE_LOG_SHEET_ID }}
+          MORNING_INTELLIGENCE_FOLDER_ID: ${{ secrets.MORNING_INTELLIGENCE_FOLDER_ID }}
         run: python spekgen_morning_intelligence.py
 
       - name: Alert on failure
