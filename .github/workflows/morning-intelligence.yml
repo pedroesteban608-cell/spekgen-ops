@@ -32,6 +32,8 @@ jobs:
           python -m pip install requests openpyxl python-dotenv google-auth google-auth-httplib2 google-api-python-client
           python -m pip show google-auth
           python -c "import google.auth; print('✅ google.auth imported')"
+          python -c "import sys; import google.auth; print('google.auth location:', google.auth.__file__); print('google.auth dir:', dir(google.auth))"
+          python -c "import os; ga_path = os.path.dirname(__import__('google.auth').__file__); print('Contents:', os.listdir(ga_path))"
           python -c "from google.auth.service_account import Credentials; print('✅ Credentials imported')"
           python setup_sheets.py
 
