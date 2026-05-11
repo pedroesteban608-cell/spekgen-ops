@@ -22,15 +22,11 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Create Google Service Account credentials file
+        env:
+          CREDS: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
         run: |
-          python3 << 'EOF'
-          import json
-          import os
-          creds_json = """${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}"""
-          with open('/tmp/google-credentials.json', 'w') as f:
-              json.dump(json.loads(creds_json), f)
-          print("✅ Credentials file created")
-          EOF
+          echo "$CREDS" > /tmp/google-credentials.json
+          cat /tmp/google-credentials.json
 
       - name: Populate Google Sheets (Setup)
         env:
