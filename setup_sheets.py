@@ -6,7 +6,7 @@ Run: python setup_sheets.py
 import json
 import os
 import sys
-from google.auth.service_account import Credentials
+from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
 def setup_sheets():
@@ -22,7 +22,7 @@ def setup_sheets():
         with open(creds_path, 'r') as f:
             creds_dict = json.load(f)
         
-        creds = Credentials.from_service_account_info(
+        creds = service_account.Credentials.from_service_account_info(
             creds_dict,
             scopes=["https://www.googleapis.com/auth/spreadsheets"]
         )
