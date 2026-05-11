@@ -21,17 +21,17 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Populate Google Sheets (Setup)
-        env:
-          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-          MASTER_REGISTRY_SHEET_ID: ${{ secrets.MASTER_REGISTRY_SHEET_ID }}
-          MORNING_INTELLIGENCE_LOG_SHEET_ID: ${{ secrets.MORNING_INTELLIGENCE_LOG_SHEET_ID }}
-        run: python setup_sheets.py
-
       - name: Create Google Service Account credentials file
         run: |
           echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}" > /tmp/google-credentials.json
           cat /tmp/google-credentials.json
+
+      - name: Populate Google Sheets (Setup)
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: /tmp/google-credentials.json
+          MASTER_REGISTRY_SHEET_ID: ${{ secrets.MASTER_REGISTRY_SHEET_ID }}
+          MORNING_INTELLIGENCE_LOG_SHEET_ID: ${{ secrets.MORNING_INTELLIGENCE_LOG_SHEET_ID }}
+        run: python setup_sheets.py
 
       - name: Run SpekGen Morning Intelligence
         env:
