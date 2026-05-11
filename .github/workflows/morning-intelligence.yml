@@ -1,0 +1,35 @@
+name: SpekGen Morning Intelligence
+
+on:
+  schedule:
+    # 8 AM Mexico City (UTC-6)
+    - cron: '0 14 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  morning-intelligence:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run SpekGen Morning Intelligence
+        env:
+          CLICKUP_TOKEN: ${{ secrets.CLICKUP_TOKEN }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          MASTER_REGISTRY_SHEET_ID: ${{ secrets.MASTER_REGISTRY_SHEET_ID }}
+        run: python spekgen_morning_intelligence.py
+
+      - name: Alert on failure
+        if: failure()
+        run: |
+          echo "🚨 Morning Intelligence Failed"
+          echo "Check logs at: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
