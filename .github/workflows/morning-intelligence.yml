@@ -19,7 +19,11 @@ jobs:
           python-version: '3.10'
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install --upgrade pip
+          pip install -v -r requirements.txt
+          pip list | grep -i google
+          python -c "from google.auth.service_account import Credentials; print('✅ Google auth imported successfully')"
 
       - name: Create Google Service Account credentials file
         run: |
